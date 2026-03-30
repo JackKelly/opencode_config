@@ -5,12 +5,8 @@ model: google/gemini-flash-latest
 temperature: 0.1
 permission:
   bash:
-    "*": ask
-    "pytest *": allow
-    "ruff *": allow
-    "ty *": allow
-    "python *": allow
-    "ls *": allow
+    "git *": ask
+    "*": allow
   read: allow
   write: allow
   edit: allow

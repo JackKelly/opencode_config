@@ -5,9 +5,8 @@ model: google/gemini-flash-latest
 temperature: 0.2
 permission:
   bash:
-    "*": ask
-    "python exploration_scripts/*": allow
-    "ls *": allow
+    "git *": ask
+    "*": allow
   read: allow
   write: allow
   edit: deny

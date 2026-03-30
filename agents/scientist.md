@@ -5,9 +5,8 @@ model: google/gemini-3.1-pro-preview
 temperature: 0.1
 permission:
   bash:
-    "*": ask
-    "python exploration_scripts/*": allow
-    "ls *": allow
+    "git *": ask
+    "*": allow
   read: allow
   write: allow
   edit: deny

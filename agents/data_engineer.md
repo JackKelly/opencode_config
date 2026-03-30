@@ -4,7 +4,9 @@ mode: all
 model: google/gemini-3.1-pro-preview
 temperature: 0.1
 permission:
-  bash: allow
+  bash:
+    "git *": ask
+    "*": allow
   read: allow
   write: allow
   edit: allow
