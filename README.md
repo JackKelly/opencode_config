@@ -47,6 +47,8 @@ The agents are coordinated by a **Conductor** and follow a rigorous, sequential 
     *   **Station 3 (Polish):** Reviewer audits for code quality and style.
     
     **Crucially:** Station N+1 never starts until Station N is completely resolved. If a station finds flaws, the Architect updates the plan (e.g., `v1.1_after_scientist.md`) and the Builder fixes the code before the pipeline continues to the next station.
+    
+    **Retroactive Veto:** At the end of each loop, the Conductor summarizes all changes and stops for human approval. You can choose to revert or modify any decisions before the next loop starts.
 4. **Finalize:** The **Architect** updates documentation, ADRs, and code comments. The **Conductor** commits the changes.
 
 ### Data Ingestion Workflow

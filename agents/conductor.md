@@ -80,8 +80,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
 
 **Start Loop {Loop} (starting at Loop=1):**
 
-1. **Step 0 (Initial Build):** If this is Loop 1 AND you have just entered this track from a "review only" prompt (skipping Track C), call `custom_build` to implement the latest plan. Wait for completion.
-2. **Station 1 (Math & ML Rigor):** 
+1. **Station 1 (Math & ML Rigor):** 
    - Call `scientist` to review the code and output `scientist_code_review_{Loop}.md`.
    - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 2.
    - If `total_flaws > 0`: 
@@ -101,9 +100,13 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
    - If `total_flaws > 0`:
      - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_reviewer.md`.
      - Call `custom_build` to fix the code. Wait for completion.
-4. **Loop Check:** 
-   - If *any* station found flaws in this loop, increment the `{Loop}` counter and start again at Station 1. 
-   - If `total_flaws == 0` across ALL three stations in this loop, break the loop and proceed to Track E: Finalization.
+4. **Loop Check & Human Veto:** 
+   - Summarize all changes made during this loop (Stations 1, 2, and 3).
+   - **STOP** and ask the user: "Here are the changes made in Loop {Loop}. Would you like to revert or modify any of these decisions before we proceed?"
+   - If the user says "Yes": Pass the user's feedback to the `architect` to update the implementation plan, then call `custom_build` to implement the human's corrections. Wait for completion.
+   - If the user says "No" (or after human corrections are built):
+     - If *any* station found flaws in this loop, increment the `{Loop}` counter and start again at Station 1.
+     - If `total_flaws == 0` across ALL three stations in this loop, break the loop and proceed to Track E: Finalization.
 
 **Builder Pushback:** At any point, if `custom_build` reports that a flaw is impossible to implement, call `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the current Station.
 
