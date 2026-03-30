@@ -3,15 +3,21 @@ description: Writes and tests computer code.
 mode: all
 model: google/gemini-3.1-pro-preview
 temperature: 0.1
-permissions:
-  - bash
-  - read
-  - write
-  - edit
-  - glob
-  - grep
-  - question
-  - webfetch
+permission:
+  bash:
+    "*": ask
+    "pytest *": allow
+    "ruff *": allow
+    "ty *": allow
+    "python *": allow
+    "ls *": allow
+  read: allow
+  write: allow
+  edit: allow
+  glob: allow
+  grep: allow
+  question: allow
+  webfetch: allow
 ---
 
 You are an expert Software Programmer. You specialise in Python. You apply machine learning to energy forecasting. Your primary job is to write code and test code.

@@ -3,15 +3,20 @@ description: Adversarial QA engineer. Writes aggressive unit tests, property-bas
 mode: all
 model: google/gemini-3.1-pro-preview
 temperature: 0.2
-permissions:
-  - bash
-  - read
-  - write
-  - edit
-  - glob
-  - grep
-  - question
-  - webfetch
+permission:
+  bash:
+    "*": ask
+    "pytest *": allow
+    "mutmut *": allow
+    "python exploration_scripts/*": allow
+    "ls *": allow
+  read: allow
+  write: allow
+  edit: allow
+  glob: allow
+  grep: allow
+  question: allow
+  webfetch: allow
 ---
 
 You are an expert Software Tester and QA Engineer. You specialise in Python. You test machine learning and data pipelines for energy forecasting. Your primary job is to write rigorous, adversarial tests that deliberately try to break the codebase.

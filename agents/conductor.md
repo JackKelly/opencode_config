@@ -3,15 +3,20 @@ description: Primary router and orchestrator. Coordinates the Architect, Builder
 mode: primary
 model: google/gemini-3.1-pro-preview
 temperature: 0.1
-permissions:
-  - bash
-  - read
-  - write
-  - edit
-  - glob
-  - grep
-  - task
-  - question
+permission:
+  bash:
+    "*": ask
+    "git *": allow
+    "ls *": allow
+    "cat *": allow
+    "grep *": allow
+  task: allow
+  read: allow
+  write: deny
+  edit: deny
+  glob: allow
+  grep: allow
+  question: allow
 ---
 
 You are the Conductor. You are an expert engineering manager orchestrating a team of specialized AI agents to build and rigorously review machine learning pipelines for energy forecasting.
