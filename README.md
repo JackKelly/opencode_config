@@ -39,9 +39,13 @@ The agents are coordinated by a **Conductor** and follow a rigorous review-and-i
 ## Standard Workflows
 
 ### Standard Complex Workflow
-1. **Plan:** The **Architect** drafts an implementation plan, which is reviewed by the **Scientist**, **Reviewer**, and **Tester**.
-2. **Approve:** The **Conductor** presents the plan to the user for approval.
-3. **Build & Review Loop:** The **Builder** implements the plan. The **Scientist**, **Tester**, and **Reviewer** concurrently audit the code. If flaws are found, the loop repeats (up to 5 times).
+1. **Plan:** The **Architect** drafts an initial implementation plan (`v0_draft.md`). The **Scientist**, **Tester**, and **Reviewer** review it **sequentially**. If flaws are found, the Architect updates the plan (e.g., `v0.1_after_scientist.md`).
+2. **Approve:** The **Conductor** presents the final plan to the user for approval.
+3. **Build & Review Loop:** The **Builder** implements the latest plan. The **Scientist**, **Tester**, and **Reviewer** audit the code **sequentially** in three "Stations":
+    *   **Station 1 (Math):** Scientist audits for data leakage and ML rigor.
+    *   **Station 2 (Robustness):** Tester audits for edge cases and testability.
+    *   **Station 3 (Polish):** Reviewer audits for code quality and style.
+    If any station finds flaws, the Architect updates the plan (e.g., `v1.1_after_scientist.md`) and the Builder fixes the code before moving to the next station.
 4. **Finalize:** The **Architect** updates documentation and ADRs. The **Conductor** commits the changes.
 
 ### Data Ingestion Workflow
