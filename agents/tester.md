@@ -1,7 +1,7 @@
 ---
 description: Adversarial QA engineer. Writes aggressive unit tests, property-based tests, and performs mutation testing.
 mode: all
-model: google/gemini-3.1-pro-preview
+model: google/gemini-flash-latest
 temperature: 0.2
 permission:
   bash:
