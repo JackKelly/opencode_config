@@ -60,15 +60,18 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 ### Track C: Standard Complex Workflow
 1. **Planning Phase:**
    - Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`.
-   - Call the `scientist`, `tester`, and `review` subagents **sequentially** to review and update the plan.
-   - If any reviewer recommends changes, the `architect` must update the plan (e.g., `docs/temp/implementation_plan_v0.1_after_scientist.md`).
-   - Commit the final plan to git.
+   - Call the `scientist`, `tester`, and `review` subagents **sequentially** to review and update the plan:
+       - **Station 1 (Math):** Call the `scientist` to read `docs/temp/implementation_plan_v0_draft.md`, and output an updated plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`.
+       - **Station 2 (Robustness):** Call the `tester` to read `docs/temp/implementation_plan_v0.1_after_scientist.md`, and output an updated plan to `docs/temp/implementation_plan_v0.2_after_tester.md`.
+       - **Station 3 (Polish):** Call the `review` to read `docs/temp/implementation_plan_v0.2_after_tester.md`, and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`.
+   - Commit the final plans to git.
    - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
 2. **Implementation & Iteration Phase (Max 5 loops):**
    - **Step 0:** Call the `custom_build` subagent to implement the latest plan.
-   - **Station 1 (Math):** Call `scientist` to output `scientist_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.1_after_scientist.md`, then call `custom_build` to fix.
-   - **Station 2 (Robustness):** Call `tester` to output `tester_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.2_after_tester.md`, then call `custom_build` to fix.
-   - **Station 3 (Polish):** Call `review` to output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
+   - **Builder Pushback:** If the `custom_build` agent reports that a flaw is impossible to implement, call the `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the iteration phase.
+   - **Station 1 (Math):** Call `scientist` to review the code against the `scientist`'s previous implementation plan, and output `scientist_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.1_after_scientist.md`, then call `custom_build` to fix.
+   - **Station 2 (Robustness):** Call `tester` to review the code against the `tester`'s previous implementation plan, and output `tester_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.2_after_tester.md`, then call `custom_build` to fix.
+   - **Station 3 (Polish):** Call `review` to review the code against the `reviewer`'s previous implementation plan, and output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
    - **Loop Check:** If *any* station found flaws, increment the Loop counter and start again at Station 1. Break the loop if `total_flaws == 0` across all three stations in a single loop.
 3. **Finalization:**
    - Call the `architect` to update `README.md`, docs, code comments, and ADRs.
