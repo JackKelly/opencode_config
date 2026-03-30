@@ -80,8 +80,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
 
 **Start Loop {Loop} (starting at Loop=1):**
 
-1. **Step 0 (Initial Build):** If this is Loop 1 AND you have just entered this track from a "review only" prompt (skipping Track C), call `custom_build` to implement the latest plan. Wait for completion.
-2. **Station 1 (Math & ML Rigor):** 
+1. **Station 1 (Math & ML Rigor):** 
    - **Phase 1 (Verification - Only if Loop > 1):**
      - Call `scientist` and provide `scientist_code_review_{Loop-1}.md`.
      - Ask: "Verification Mode: Did the Builder successfully fix the specific flaws you identified in Loop {Loop-1}? Check the `## Review Responses & Rejections` section of the latest plan to see if the Architect formally rejected any of them. If any flaws remain unfixed and unrejected, output a new review re-raising them. If all are resolved, output `total_flaws: 0`."
@@ -94,7 +93,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.1_after_scientist.md`.
        - Call `custom_build` to fix the code. Wait for completion.
        - *Do not proceed to Station 2 until the Builder is finished.*
-3. **Station 2 (Robustness & Testing):**
+2. **Station 2 (Robustness & Testing):**
    - **Phase 1 (Verification - Only if Loop > 1):**
      - Call `tester` and provide `tester_code_review_{Loop-1}.md`.
      - Ask: "Verification Mode: Did the Builder successfully fix the specific flaws you identified in Loop {Loop-1}? Check the `## Review Responses & Rejections` section of the latest plan to see if the Architect formally rejected any of them. If any flaws remain unfixed and unrejected, output a new review re-raising them. If all are resolved, output `total_flaws: 0`."
@@ -107,7 +106,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.2_after_tester.md`.
        - Call `custom_build` to fix the code. Wait for completion.
        - *Do not proceed to Station 3 until the Builder is finished.*
-4. **Station 3 (Polish & Style):**
+3. **Station 3 (Polish & Style):**
    - **Phase 1 (Verification - Only if Loop > 1):**
      - Call `review` and provide `reviewer_code_review_{Loop-1}.md`.
      - Ask: "Verification Mode: Did the Builder successfully fix the specific flaws you identified in Loop {Loop-1}? Check the `## Review Responses & Rejections` section of the latest plan to see if the Architect formally rejected any of them. If any flaws remain unfixed and unrejected, output a new review re-raising them. If all are resolved, output `total_flaws: 0`."
@@ -119,8 +118,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - If `total_flaws > 0`:
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_reviewer.md`.
        - Call `custom_build` to fix the code. Wait for completion.
-5. **Loop Check & Human Veto:** 
-
+4. **Loop Check & Human Veto:** 
    - Summarize all changes made during this loop (Stations 1, 2, and 3).
    - **STOP** and ask the user: "Here are the changes made in Loop {Loop}. Would you like to revert or modify any of these decisions before we proceed?"
    - If the user says "Yes": Pass the user's feedback to the `architect` to update the implementation plan, then call `custom_build` to implement the human's corrections. Wait for completion.
