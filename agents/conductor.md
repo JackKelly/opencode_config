@@ -66,7 +66,8 @@ Your job is to route the user's prompt to the correct subagents and manage the s
        - **Station 3 (Polish):** Call the `review` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`. Wait for completion.
    - Commit the final plans to git.
    - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
-   - After approval, proceed to Track D: Code Review & Iteration Loop.
+   - After approval, call `custom_build` to implement it. Wait for completion.
+   - Proceed to Track D: Code Review & Iteration Loop.
 
 ### Track D: Code Review & Iteration Loop (Max 5 loops)
 
@@ -74,7 +75,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
 
 **Start Loop {Loop} (starting at Loop=1):**
 
-1. **Step 0 (Initial Build):** If an implementation plan exists (from a previous review loop, or from Track C), call `custom_build` to implement it. Wait for completion.
+1. **Step 0 (Initial Build):** If this is Loop 1 AND you have just entered this track from a "review only" prompt (skipping Track C), call `custom_build` to implement the latest plan. Wait for completion.
 2. **Station 1 (Math & ML Rigor):** 
    - Call `scientist` to review the code and output `scientist_code_review_{Loop}.md`.
    - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 2.
@@ -82,20 +83,20 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - Call `architect` to update the plan to `implementation_plan_v{Loop}.1_after_scientist.md`.
      - Call `custom_build` to fix the code. Wait for completion.
      - *Do not proceed to Station 2 until the Builder is finished.*
-3. **Station 2 (Robustness & Testing):**
+2. **Station 2 (Robustness & Testing):**
    - Call `tester` to review the code and output `tester_code_review_{Loop}.md`.
    - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 3.
    - If `total_flaws > 0`:
      - Call `architect` to update the plan to `implementation_plan_v{Loop}.2_after_tester.md`.
      - Call `custom_build` to fix the code. Wait for completion.
      - *Do not proceed to Station 3 until the Builder is finished.*
-4. **Station 3 (Polish & Style):**
+3. **Station 3 (Polish & Style):**
    - Call `review` to review the code and output `reviewer_code_review_{Loop}.md`.
    - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
    - If `total_flaws > 0`:
      - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_reviewer.md`.
      - Call `custom_build` to fix the code. Wait for completion.
-5. **Loop Check:** 
+4. **Loop Check:** 
    - If *any* station found flaws in this loop, increment the `{Loop}` counter and start again at Station 1. 
    - If `total_flaws == 0` across ALL three stations in this loop, break the loop and proceed to Track E: Finalization.
 

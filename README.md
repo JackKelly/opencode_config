@@ -6,15 +6,15 @@ Rather than relying on a single general-purpose coding assistant, this configura
 
 ## The Multi-Agent Architecture
 
-The agents are coordinated by a **Conductor** and follow a rigorous review-and-implementation loop.
+The agents are coordinated by a **Conductor** and follow a rigorous, sequential review-and-implementation loop.
 
 ### 1. 🚦 Conductor (`conductor`)
 * **Role:** Primary Router & Orchestrator
-* **Focus:** Triage user prompts, route tasks to subagents, manage the implementation loop, and handle all `git` commits. It ensures that every change is reviewed by multiple specialized agents.
+* **Focus:** Triage user prompts, route tasks to subagents, manage the implementation loop, and handle all `git` commits. It is a pure orchestrator and does not perform technical tasks (like exploration or testing) itself.
 
 ### 2. 🏗️ Architect (`architect`)
 * **Role:** System Designer & Planner
-* **Focus:** Analyzes the codebase and plans architectural changes. Enforces modern Python practices (e.g., `polars` over `pandas`), modularity, and elegance. It creates the blueprint before any code is written.
+* **Focus:** Analyzes the codebase and plans architectural changes. It owns the **Versioned Implementation Plan** and acts as the final technical authority, with the power to formally reject reviewer flaws if they are technically impossible.
 
 ### 3. ⚙️ Data Engineer (`data_engineer`)
 * **Role:** Data Ingestion Specialist
@@ -22,31 +22,32 @@ The agents are coordinated by a **Conductor** and follow a rigorous review-and-i
 
 ### 4. 💻 Builder (`custom_build`)
 * **Role:** Software Engineer
-* **Focus:** Executes the Architect's plan. Writes robust, production-ready code that "fails loudly." Enforces strict typing and ensures invalid states are unrepresentable.
+* **Focus:** Executes the Architect's plan. Writes robust, production-ready code that "fails loudly." It can provide technical pushback to the Architect if a requested change is unimplementable.
 
 ### 5. 🔬 Scientist (`scientist`)
 * **Role:** ML Auditor & Methodologist
-* **Focus:** The domain expert. Rigorously audits ML pipelines for **data leakage** and **lookahead bias**. It verifies that temporal cross-validation is used correctly and ensures physical realism in data.
+* **Focus:** The domain expert. Rigorously audits ML pipelines for **data leakage** and **lookahead bias**. It ensures the mathematical and scientific foundation of the model is sound.
 
 ### 6. 🕵️ Reviewer (`review`)
 * **Role:** Code Reviewer
-* **Focus:** Inspects new and existing code for dead code, logical flaws, and inefficiencies. It flags functions that are too long and checks for proper exception handling.
+* **Focus:** Inspects code for dead code, logical flaws, and maintainability. It is the final "Station" in the review loop, focusing on polish, style, and engineering best practices.
 
 ### 7. 💥 Tester (`tester`)
 * **Role:** Adversarial QA Engineer
-* **Focus:** Actively tries to break the code. Writes aggressive unit tests, property-based tests (via `hypothesis`), and runs mutation testing (via `mutmut`).
+* **Focus:** Strictly focused on **testability and QA**. It writes adversarial tests and identifies architectural barriers to testing. It is forbidden from providing general code review (style, naming, etc.).
 
 ## Standard Workflows
 
 ### Standard Complex Workflow
 1. **Plan:** The **Architect** drafts an initial implementation plan (`v0_draft.md`). The **Scientist**, **Tester**, and **Reviewer** review it **sequentially**. If flaws are found, the Architect updates the plan (e.g., `v0.1_after_scientist.md`).
 2. **Approve:** The **Conductor** presents the final plan to the user for approval.
-3. **Build & Review Loop:** The **Builder** implements the latest plan. The **Scientist**, **Tester**, and **Reviewer** audit the code **sequentially** in three "Stations":
+3. **Build & Review Loop:** The **Builder** implements the latest plan (Step 0). The **Conductor** then moves the code through three distinct **Stations** in strict sequential order:
     *   **Station 1 (Math):** Scientist audits for data leakage and ML rigor.
     *   **Station 2 (Robustness):** Tester audits for edge cases and testability.
     *   **Station 3 (Polish):** Reviewer audits for code quality and style.
-    If any station finds flaws, the Architect updates the plan (e.g., `v1.1_after_scientist.md`) and the Builder fixes the code before moving to the next station.
-4. **Finalize:** The **Architect** updates documentation and ADRs. The **Conductor** commits the changes.
+    
+    **Crucially:** Station N+1 never starts until Station N is completely resolved. If a station finds flaws, the Architect updates the plan (e.g., `v1.1_after_scientist.md`) and the Builder fixes the code before the pipeline continues to the next station.
+4. **Finalize:** The **Architect** updates documentation, ADRs, and code comments. The **Conductor** commits the changes.
 
 ### Data Ingestion Workflow
 1. **Explore:** The **Data Engineer** profiles the new dataset in `exploration_scripts/`.
