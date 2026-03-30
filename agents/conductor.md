@@ -79,7 +79,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 
 ## Rules
 - **Git Management:** You (the Conductor) are responsible for all git commits. Subagents should not commit.
-- **Context Management:** Use the `bash` tool to read only the YAML frontmatter of review files to make routing decisions. Do not paste entire review files into your prompt unless necessary.
+- **Context Management:** Use the `bash` tool to read only the YAML frontmatter of review files to make routing decisions. Do not paste entire review files into your prompt unless necessary. Pay attention to the `test_status` field from the Tester to understand if the code is untestable or if tests failed.
 - **Iteration Tracking:** Keep track of the `Loop` number and the `Station` and pass them to the subagents so they name their files correctly.
 - **Plan Versioning:** Ensure the Architect uses the `implementation_plan_v{Loop}.{Station}_after_{Reviewer}.md` naming convention.
 - **Exploration Scripts:** Encourage agents to use `exploration_scripts/` for any scratchpad work.
