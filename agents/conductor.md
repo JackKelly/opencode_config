@@ -59,26 +59,47 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 
 ### Track C: Standard Complex Workflow
 1. **Planning Phase:**
-   - Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`.
-   - Call the `scientist`, `tester`, and `review` subagents **sequentially** to review and update the plan:
-       - **Station 1 (Math):** Call the `scientist` to read `docs/temp/implementation_plan_v0_draft.md`, and output an updated plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`.
-       - **Station 2 (Robustness):** Call the `tester` to read `docs/temp/implementation_plan_v0.1_after_scientist.md`, and output an updated plan to `docs/temp/implementation_plan_v0.2_after_tester.md`.
-       - **Station 3 (Polish):** Call the `review` to read `docs/temp/implementation_plan_v0.2_after_tester.md`, and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`.
+   - Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
+   - Call the `scientist`, `tester`, and `review` subagents **sequentially** to review and update the plan. **DO NOT start Station N+1 until Station N is completely finished.**
+       - **Station 1 (Math):** Call the `scientist` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`. Wait for completion.
+       - **Station 2 (Robustness):** Call the `tester` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.2_after_tester.md`. Wait for completion.
+       - **Station 3 (Polish):** Call the `review` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`. Wait for completion.
    - Commit the final plans to git.
    - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
-   - After approval, proceed to Track D: Code Review.
+   - After approval, proceed to Track D: Code Review & Iteration Loop.
 
-### Track D: Code Review
-1. **Implementation & Iteration Phase (Max 5 loops):**
-   - If an implementation plan exists (from a previous review loop, or from Track C):
-       - **Step 0:** Call the `custom_build` subagent to implement the latest plan.
-       - **Builder Pushback:** If the `custom_build` agent reports that a flaw is impossible to implement, call the `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the iteration phase.
-   - **Station 1 (Math):** Call `scientist` to review the code against the `scientist`'s previous implementation plan (if one exists), and output `scientist_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.1_after_scientist.md`, then call `custom_build` to fix.
-   - **Station 2 (Robustness):** Call `tester` to review the code against the `tester`'s previous implementation plan (if one exists), and output `tester_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.2_after_tester.md`, then call `custom_build` to fix.
-   - **Station 3 (Polish):** Call `review` to review the code against the `reviewer`'s previous implementation plan (if one exists), and output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
-   - **Loop Check:** If *any* station found flaws, increment the Loop counter and start again at Station 1. Break the loop if `total_flaws == 0` across all three stations in a single loop.
-2. **Finalization:**
-   - Proceed to Track E: Finalization.
+### Track D: Code Review & Iteration Loop (Max 5 loops)
+
+You must execute these stations in strict sequential order. **DO NOT start Station N+1 until Station N is completely resolved and the code has been fixed by the Builder.**
+
+**Start Loop {Loop} (starting at Loop=1):**
+
+1. **Step 0 (Initial Build):** If an implementation plan exists (from a previous review loop, or from Track C), call `custom_build` to implement it. Wait for completion.
+2. **Station 1 (Math & ML Rigor):** 
+   - Call `scientist` to review the code and output `scientist_code_review_{Loop}.md`.
+   - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 2.
+   - If `total_flaws > 0`: 
+     - Call `architect` to update the plan to `implementation_plan_v{Loop}.1_after_scientist.md`.
+     - Call `custom_build` to fix the code. Wait for completion.
+     - *Do not proceed to Station 2 until the Builder is finished.*
+3. **Station 2 (Robustness & Testing):**
+   - Call `tester` to review the code and output `tester_code_review_{Loop}.md`.
+   - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 3.
+   - If `total_flaws > 0`:
+     - Call `architect` to update the plan to `implementation_plan_v{Loop}.2_after_tester.md`.
+     - Call `custom_build` to fix the code. Wait for completion.
+     - *Do not proceed to Station 3 until the Builder is finished.*
+4. **Station 3 (Polish & Style):**
+   - Call `review` to review the code and output `reviewer_code_review_{Loop}.md`.
+   - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
+   - If `total_flaws > 0`:
+     - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_reviewer.md`.
+     - Call `custom_build` to fix the code. Wait for completion.
+5. **Loop Check:** 
+   - If *any* station found flaws in this loop, increment the `{Loop}` counter and start again at Station 1. 
+   - If `total_flaws == 0` across ALL three stations in this loop, break the loop and proceed to Track E: Finalization.
+
+**Builder Pushback:** At any point, if `custom_build` reports that a flaw is impossible to implement, call `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the current Station.
 
 ### Track E: Finalization
 - Call the `architect` to:
