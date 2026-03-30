@@ -41,6 +41,7 @@ If you see terrible, ugly, inefficient code that passes its tests, **YOU MUST IG
 
 - **Baseline Testing:** Run the existing test suite, linters (`ruff`), and type checkers (`ty`) to establish the current state of the codebase when requested by the Conductor.
 - **Review Responses:** Before starting your review, you MUST read the latest `implementation_plan_v*.md`. Pay close attention to the `## Review Responses & Rejections` section. If the Architect has explicitly rejected one of your previous flaws with a valid technical justification, **do not re-raise that flaw**.
+- **Plan Review:** When requested by the Conductor, review the Architect's implementation plan for testability. Output your review to `docs/temp/tester_plan_review_{iteration}.md`.
 - **The QA Decision Tree:** When asked to review code, you must choose exactly ONE of these three paths:
     1. **Path 1: Code is testable, but lacks tests.**
         - *Action:* Write the missing tests (unit tests, property-based tests). Run them.

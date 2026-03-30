@@ -58,15 +58,20 @@ Your job is to route the user's prompt to the correct subagents and manage the s
    - Proceed to Track E: Finalization.
 
 ### Track C: Standard Complex Workflow
-1. **Planning Phase:**
-   - Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
-   - Call the `scientist`, `tester`, and `review` subagents **sequentially** to review and update the plan. **DO NOT start Station N+1 until Station N is completely finished.**
-       - **Station 1 (Math):** Call the `scientist` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`. Wait for completion.
-       - **Station 2 (Robustness):** Call the `tester` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.2_after_tester.md`. Wait for completion.
-       - **Station 3 (Polish):** Call the `review` to read the latest plan and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`. Wait for completion.
+1. **Planning Phase (Plan Batching):**
+   - **Step 0:** Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
+   - **Station 1 (Math):** 
+     - Call the `scientist` to review the plan `v0_draft.md`. Scientist outputs `docs/temp/scientist_plan_review_0.md`.
+     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`. Wait for completion.
+   - **Station 2 (Robustness):** 
+     - Call the `tester` to review the plan `v0.1_after_scientist.md`. Tester outputs `docs/temp/tester_plan_review_0.md`.
+     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.2_after_tester.md`. Wait for completion.
+   - **Station 3 (Polish):** 
+     - Call the `review` to review the plan `v0.2_after_tester.md`. Reviewer outputs `docs/temp/reviewer_plan_review_0.md`.
+     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`. Wait for completion.
    - Commit the final plans to git.
    - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
-   - After approval, call `custom_build` to implement it. Wait for completion.
+   - After approval, call `custom_build` to implement the final plan. Wait for completion.
    - Proceed to Track D: Code Review & Iteration Loop.
 
 ### Track D: Code Review & Iteration Loop (Max 5 loops)

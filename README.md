@@ -39,8 +39,8 @@ The agents are coordinated by a **Conductor** and follow a rigorous, sequential 
 ## Standard Workflows
 
 ### Standard Complex Workflow
-1. **Plan:** The **Architect** drafts an initial implementation plan (`v0_draft.md`). The **Scientist**, **Tester**, and **Reviewer** review it **sequentially**. If flaws are found, the Architect updates the plan (e.g., `v0.1_after_scientist.md`).
-2. **Approve:** The **Conductor** presents the final plan to the user for approval.
+1. **Plan (Plan Batching):** The **Architect** drafts an initial implementation plan (`v0_draft.md`). The **Scientist**, **Tester**, and **Reviewer** review the plan **sequentially**. After each review, the Architect updates the plan (e.g., `v0.1_after_scientist.md`). This ensures each reviewer sees the latest, refined blueprint.
+2. **Approve:** The **Conductor** presents the final plan (`v0.3`) to the user for approval.
 3. **Build & Review Loop:** The **Builder** implements the latest plan (Step 0). The **Conductor** then moves the code through three distinct **Stations** in strict sequential order:
     *   **Station 1 (Math):** Scientist audits for data leakage and ML rigor.
     *   **Station 2 (Robustness):** Tester audits for edge cases and testability.
