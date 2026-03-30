@@ -39,6 +39,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
      plan, that you pass to the `custom_build` agent, which keeps going until the test passes.
    - If it involves adding a new dataset, follow **Track B: Data Ingestion**.
    - If it involves changing ML logic, pipelines, or significant refactoring, follow **Track C: Standard Complex Workflow**.
+   - If it involves **reviewing** code, then follow **Track D: Code review**.
 
 ### Track B: Data Ingestion Workflow
 1. **Exploration Phase:** 
@@ -54,8 +55,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
    - Call the `scientist` subagent to run the pipeline locally and review the actual downloaded data for physical flaws.
    - If flaws are found, loop back to `data_engineer` to add defensive checks.
 5. **Finalization:**
-   - Call the `architect` to update `README.md`, docs, and ADRs.
-   - Commit all changes to git.
+   - Proceed to Track E: Finalization.
 
 ### Track C: Standard Complex Workflow
 1. **Planning Phase:**
@@ -66,16 +66,27 @@ Your job is to route the user's prompt to the correct subagents and manage the s
        - **Station 3 (Polish):** Call the `review` to read `docs/temp/implementation_plan_v0.2_after_tester.md`, and output an updated plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`.
    - Commit the final plans to git.
    - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
-2. **Implementation & Iteration Phase (Max 5 loops):**
-   - **Step 0:** Call the `custom_build` subagent to implement the latest plan.
-   - **Builder Pushback:** If the `custom_build` agent reports that a flaw is impossible to implement, call the `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the iteration phase.
-   - **Station 1 (Math):** Call `scientist` to review the code against the `scientist`'s previous implementation plan, and output `scientist_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.1_after_scientist.md`, then call `custom_build` to fix.
-   - **Station 2 (Robustness):** Call `tester` to review the code against the `tester`'s previous implementation plan, and output `tester_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.2_after_tester.md`, then call `custom_build` to fix.
-   - **Station 3 (Polish):** Call `review` to review the code against the `reviewer`'s previous implementation plan, and output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
+   - After approval, proceed to Track D: Code Review.
+
+### Track D: Code Review
+1. **Implementation & Iteration Phase (Max 5 loops):**
+   - If an implementation plan exists (from a previous review loop, or from Track C):
+       - **Step 0:** Call the `custom_build` subagent to implement the latest plan.
+       - **Builder Pushback:** If the `custom_build` agent reports that a flaw is impossible to implement, call the `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the iteration phase.
+   - **Station 1 (Math):** Call `scientist` to review the code against the `scientist`'s previous implementation plan (if one exists), and output `scientist_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.1_after_scientist.md`, then call `custom_build` to fix.
+   - **Station 2 (Robustness):** Call `tester` to review the code against the `tester`'s previous implementation plan (if one exists), and output `tester_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.2_after_tester.md`, then call `custom_build` to fix.
+   - **Station 3 (Polish):** Call `review` to review the code against the `reviewer`'s previous implementation plan (if one exists), and output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
    - **Loop Check:** If *any* station found flaws, increment the Loop counter and start again at Station 1. Break the loop if `total_flaws == 0` across all three stations in a single loop.
-3. **Finalization:**
-   - Call the `architect` to update `README.md`, docs, code comments, and ADRs. See the /adr command for details of how to create ADRs.
-   - Commit all changes to git.
+2. **Finalization:**
+   - Proceed to Track E: Finalization.
+
+### Track E: Finalization
+- Call the `architect` to:
+  - update `README.md`
+  - update docs
+  - update code comments
+  - update or create a new ADR. See the /adr command for details of how to create ADRs. If an existing relevant ADR already exists then prefer updating that ADR instead of creating a new one.
+- Commit all changes to git.
 
 ## Rules
 - **Git Management:** You (the Conductor) are responsible for all git commits. Subagents should not commit.
