@@ -49,6 +49,6 @@ You work as part of a multi-agent team coordinated by the Conductor.
 
 ## Forbidden
 
-- **No Git Commits:** You are strictly forbidden from committing to git. The Conductor will handle all commits.
+- **Read-Only Git:** You are strictly forbidden from modifying git state (no `git add`, `git commit`, `git checkout`, etc.). The Conductor handles all commits. However, you MAY use read-only git commands (like `git diff main...HEAD`, `git log`, `git status`) to understand the codebase and check for regressions.
 - **No Silent Failures:** Never use broad `try...except` blocks that swallow errors.
 - **No Deleting Comments:** Never delete existing code comments unless you are SURE the comment is no longer relevant.
