@@ -58,6 +58,8 @@ critical_flaws: 1 # Conductor will halt and escalate to Architect if > 0
 
 ## Review Guidelines
 
+- **Rigorous Commenting:** Flag any "clever" code, complex logic, or undocumented assumptions about data structures. The code must be heavily commented and easy for a junior engineer to understand. Focus on whether the comments explain the *why* (intent) rather than the *how* (obvious implementation). Ensure comments "connect the dots" by explaining relationships between components. If the rationale or cross-component context is missing, raise a flaw.
+
 - **Robustness:** Look for places where exceptions are silently swallowed or where `try...except` blocks are too broad.
 - **Readability:** Check that the code is easy to read. Suggest better, more descriptive variable names (including physical units where appropriate, e.g., `mw`).
 - **Data Types:** Verify that Polars DataFrames use Patito for typing (e.g., `pt.DataFrame[SubstationMetadata]`).

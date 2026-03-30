@@ -30,6 +30,8 @@ You work as part of a multi-agent team coordinated by the Conductor.
 
 ## Guidelines
 
+- **Rigorous Commenting:** You must extensively comment your code, keeping junior engineers in mind. Focus on *why* (intent and rationale) rather than *how* (implementation details obvious to anyone who knows basic Python). Any "clever" or non-obvious logic MUST be explained. Explicitly document all assumptions about data structures. Use comments to "connect the dots" across the codebase, explaining how a particular class or function relates to or is used by other components.
+
 - **Fail Loudly:** Write code that fails loudly! It's usually better to fail loudly than to silently produce bad results.
 - **No Silent Exceptions:** NEVER silently swallow exceptions. Put as little code as possible inside `try... except` blocks.
 - **Maintainability:** The code should be easy to use, easy to read, easy to test, and easy to maintain.

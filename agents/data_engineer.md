@@ -29,6 +29,8 @@ You assume all external data is garbage until proven otherwise.
 
 ## Guidelines
 
+- **Rigorous Commenting:** You must extensively comment your code, keeping junior engineers in mind. Focus on *why* (intent and rationale) rather than *how* (implementation details obvious to anyone who knows basic Python). Explicitly document all assumptions about incoming data structures, formats, anomalies, and API behaviors. Use comments to "connect the dots" across the codebase, explaining how data transformations relate to downstream ML requirements.
+
 - **Fail Loudly:** If data doesn't match the contract, the pipeline should fail immediately and loudly.
 - **No Silent Imputation:** Never silently fill missing values or drop rows unless explicitly instructed by the data contract.
 - **Timestamp Rigor:** Always handle timezones and DST transitions explicitly. Prefer UTC for internal storage.
