@@ -74,7 +74,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
    - **Station 3 (Polish):** Call `review` to review the code against the `reviewer`'s previous implementation plan, and output `reviewer_code_review_{Loop}.md`. If `total_flaws > 0`, call `architect` to output `implementation_plan_v{Loop}.3_after_reviewer.md`, then call `custom_build` to fix.
    - **Loop Check:** If *any* station found flaws, increment the Loop counter and start again at Station 1. Break the loop if `total_flaws == 0` across all three stations in a single loop.
 3. **Finalization:**
-   - Call the `architect` to update `README.md`, docs, code comments, and ADRs.
+   - Call the `architect` to update `README.md`, docs, code comments, and ADRs. See the /adr command for details of how to create ADRs.
    - Commit all changes to git.
 
 ## Rules
