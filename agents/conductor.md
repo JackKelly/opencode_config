@@ -4,17 +4,13 @@ mode: primary
 model: google/gemini-flash-latest
 temperature: 0.1
 permission:
-  bash:
-    "git *": allow
-    "cat docs/temp/*.md": allow
-    "ls docs/temp/": allow
-    "*": deny
+  bash: allow
   task: allow
   read: allow
-  write: deny
-  edit: deny
-  glob: deny
-  grep: deny
+  write: allow
+  edit: allow
+  glob: allow
+  grep: allow
   question: allow
 ---
 
