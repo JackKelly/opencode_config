@@ -1,7 +1,6 @@
 ---
 description: Primary router and orchestrator. Coordinates the Architect, Builder, and Reviewers.
 mode: primary
-model: google/gemini-flash-latest
 temperature: 0.1
 permission:
   bash: allow

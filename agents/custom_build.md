@@ -1,7 +1,6 @@
 ---
 description: Writes and tests computer code.
 mode: all
-model: google/gemini-flash-latest
 temperature: 0.1
 permission:
   bash:

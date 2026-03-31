@@ -1,7 +1,6 @@
 ---
 description: Code reviewer. Looks for dead code, logical flaws, inefficiencies, and maintainability issues.
 mode: all
-model: google/gemini-flash-latest
 temperature: 0.2
 permission:
   bash:

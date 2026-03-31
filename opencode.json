@@ -5,6 +5,21 @@
       "options": {
         "setCacheKey": true
       }
+    },
+    "local_a6000": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local A6000 GPU",
+      "options": {
+        "baseURL": "http://workstation:8000/v1",
+        "apiKey": "vllm-secret-key"
+      },
+      "models": {
+        "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ": {
+          "name": "Qwen 32B Coder",
+          "tool_call": true
+        }
+      }
     }
-  }
+  },
+  "defaultModel": "local_a6000/Qwen/Qwen2.5-Coder-32B-Instruct-AWQ"
 }
