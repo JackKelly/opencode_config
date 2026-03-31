@@ -57,6 +57,14 @@ The agents are coordinated by a **Conductor** and follow a rigorous, sequential 
 3. **Implement:** The **Data Engineer** builds the ingestion pipeline and adds it to **Dagster**.
 4. **Validate:** The **Tester** writes property-based tests, and the **Scientist** audits the actual ingested data.
 
+## Performance & Caching
+
+To reduce latency and API costs, this configuration supports native context caching for providers like Google Gemini and Anthropic. Caching is handled **globally at the provider level** rather than within individual agent definitions.
+
+By enabling `setCacheKey` in your `opencode.json`, the framework automatically caches the extensive system prompts of these custom agents, along with the conversation history and tools.
+
+For more details, see the [OpenCode Configuration Documentation](https://opencode.ai/docs/config/#models).
+
 ## Installation
 
 To use these agents across all your local projects, clone this repository and symlink it to your OpenCode config directory:
