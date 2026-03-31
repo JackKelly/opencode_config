@@ -16,17 +16,21 @@
       "models": {
         "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ": {
           "name": "Qwen 2.5 32B Coder Instruct",
-          "tool_call": true
+          "tool_call": true,
+	  "maxOutputTokens": 8192
         },
         "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4": {
           "name": "Qwen 3.5 35B MoE",
-          "tool_call": true
+          "tool_call": true,
+	  "maxOutputTokens": 8192
         },
         "Qwen/Qwen3.5-27B-GPTQ-Int4": {
           "name": "Qwen 3.5 27B dense",
-          "tool_call": true
+          "tool_call": true,
+	  "maxOutputTokens": 8192
         }
       }
     }
-  }
+  },
+  "model": "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4",
 }
