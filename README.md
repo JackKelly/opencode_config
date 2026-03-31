@@ -70,4 +70,5 @@ rm -rf ~/.config/opencode/agents
 mkdir -p ~/.config/opencode
 ln -s ~/dev/opencode_config/agents ~/.config/opencode/agents
 ln -s ~/dev/opencode_config/commands ~/.config/opencode/commands
+ln -s ~/dev/opencode_config/opencode.json ~/.config/opencode/opencode.json
 ```
