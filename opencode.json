@@ -4,6 +4,14 @@
     "google": {
       "options": {
         "setCacheKey": true
+      },
+      "models": {
+        "gemini-flash-latest": {
+          "limit": { "context": 199000, "output": 8192 }
+        },
+        "gemini-3-pro-preview": {
+          "limit": { "context": 199000, "output": 8192 }
+        }
       }
     },
     "local_a6000": {
@@ -17,17 +25,17 @@
         "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ": {
           "name": "Qwen 2.5 32B Coder Instruct",
           "tool_call": true,
-	  "limit": { "context": 0, "output": 8192 },
+          "limit": { "context": 0, "output": 8192 }
         },
         "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4": {
           "name": "Qwen 3.5 35B MoE",
           "tool_call": true,
-	  "limit": { "context": 0, "output": 8192 },
+          "limit": { "context": 0, "output": 8192 }
         },
         "Qwen/Qwen3.5-27B-GPTQ-Int4": {
           "name": "Qwen 3.5 27B dense",
           "tool_call": true,
-	  "limit": { "context": 0, "output": 8192 },
+          "limit": { "context": 0, "output": 8192 }
         }
       }
     }
