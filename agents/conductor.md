@@ -43,7 +43,7 @@ exploding.
 
 ### Track B: Data Ingestion Workflow
 1. **Exploration Phase:** 
-   - Call the `data_engineer` subagent to write scripts in `exploration_scripts/` to download sample data and profile it.
+   - Call the `data_engineer` subagent to write scripts in `exploration_scripts/` to download sample data and explore it.
 2. **Contract & Plan Phase:** 
    - Call the `architect` subagent to review the exploration results and draft an implementation plan in `docs/temp/implementation_plan.md`, including a strict Patito Data Contract.
    - Call the `scientist` subagent to review the contract for physical realism and generate a handful of plots and statistical summaries of the new dataset in `docs/temp/dataset_summary.md`.
@@ -58,20 +58,19 @@ exploding.
    - Proceed to Track E: Finalization.
 
 ### Track C: Standard Complex Workflow
-1. **Planning Phase (Plan Batching):**
-   - **Step 0:** Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
-   - **Station 1 (Math):** 
-     - Call the `scientist` to review the plan `v0_draft.md`. Scientist outputs `docs/temp/scientist_plan_review_0.md`.
-     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.1_after_scientist.md`. Wait for completion.
-   - **Station 2 (Robustness):** 
-     - Call the `tester` to review the plan `v0.1_after_scientist.md`. Tester outputs `docs/temp/tester_plan_review_0.md`.
-     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.2_after_tester.md`. Wait for completion.
-   - **Station 3 (Polish):** 
-     - Call the `review` to review the plan `v0.2_after_tester.md`. Reviewer outputs `docs/temp/reviewer_plan_review_0.md`.
-     - Call the `architect` to read the review and update the plan to `docs/temp/implementation_plan_v0.3_after_reviewer.md`. Wait for completion.
+1. **Planning Phase (Concurrent Scatter-Gather):**
+   - **Step 0 (Draft):** Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
+   - **Step 1 (Concurrent Review):** Call the `scientist`, `tester`, and `review` subagents **concurrently** (in parallel) to review `v0_draft.md`. 
+     - Scientist outputs `docs/temp/scientist_plan_review_0.md`.
+     - Tester outputs `docs/temp/tester_plan_review_0.md`.
+     - Reviewer outputs `docs/temp/reviewer_plan_review_0.md`.
+     - Wait for all three to complete.
+   - **Step 2 (Gather & Merge):** Call the `architect` to read all three reviews and synthesize them into `docs/temp/implementation_plan_v1_merged.md`. 
+     - Instruct the Architect to explicitly look for conflicting constraints or fundamental shifts (e.g., the Scientist invalidating the core architecture).
+     - If the Architect finds major unresolvable conflicts, it must document them in a `## Conflicts` section in the merged plan.
    - Use the `bash` tool to commit the final plans to git.
-   - **STOP** and ask the user for approval. Provide a detailed summary of the changes made by each step of review.
-   - After approval, call `custom_build` to implement the final plan. Wait for completion, then use the `bash` tool to commit to git with a verbose and formatted message.
+   - **STOP** and ask the user for approval. Provide a detailed summary of the merged plan. **CRITICAL:** If the Architect flagged any major disagreements or conflicts between the reviewers, explicitly present these to the user for a final decision.
+   - After approval (and resolving any conflicts with the user), call `custom_build` to implement the final plan. Wait for completion, then use the `bash` tool to commit to git with a verbose and formatted message.
    - Proceed to Track D: Code Review & Iteration Loop.
 
 ### Track D: Code Review & Iteration Loop (Max 5 loops)
