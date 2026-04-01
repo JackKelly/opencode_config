@@ -31,6 +31,5 @@
         }
       }
     }
-  },
-  "model": "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4",
+  }
 }
