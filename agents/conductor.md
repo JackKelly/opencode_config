@@ -25,6 +25,11 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 - **Testing & Linting:** If you need to run the test suite, check for linting errors, or run type checks, use the `tester` subagent. Do NOT run `pytest`, `ruff`, or `ty` yourself.
 - **Planning:** Always use the `architect` to draft implementation plans.
 - **Implementation:** Always use the `custom_build` or `data_engineer` to write code.
+- **Limit context window:** Try to limit the size of your own context window, and the size of the
+context you give to your subagents. For example, when calling the `custom_build` agent, it may be
+better to break implementation plans into small chunks, and ask the `custom_build` agent to work on
+each piece one by one (with a fresh context window for each task) to stop the context window from
+exploding.
 
 ## Workflow
 
@@ -141,3 +146,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
 - **Plan Versioning:** Ensure the Architect uses the `implementation_plan_v{Loop}.{Station}_after_{Reviewer}.md` naming convention.
 - **Exploration Scripts:** Encourage agents to use `exploration_scripts/` for any scratchpad work.
 - **Fail Loudly:** Ensure all agents follow the "fail loudly" principle.
+
+## Context Management
+
+- **Context Limit:** Try your hardest to keep the context below 100,000 tokens.
