@@ -1,8 +1,10 @@
 ---
+name: data-ingestion
 description: Workflow for adding and exploring new datasets, including Patito contracts and Dagster integration.
 ---
 # Data Ingestion Workflow
 
+## What I do
 1. **Exploration Phase:** 
    - Call the `data_engineer` subagent to write scripts in `exploration_scripts/` to download sample data and explore it.
 2. **Contract & Plan Phase:** 
@@ -17,3 +19,6 @@ description: Workflow for adding and exploring new datasets, including Patito co
    - If flaws are found, loop back to `data_engineer` to add defensive checks.
 5. **Finalization:**
    - Load and proceed to the `finalization` skill.
+
+## When to use me
+Use this when you need to add a new data source to the project. This skill ensures the data is explored, contracted, and validated before being integrated into the main pipeline.

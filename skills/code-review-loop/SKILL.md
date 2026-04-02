@@ -1,8 +1,10 @@
 ---
+name: code-review-loop
 description: Strict sequential code review and iteration loop involving Scientist, Tester, and Reviewer.
 ---
 # Code Review & Iteration Loop (Max 5 loops)
 
+## What I do
 You must execute these stations in strict sequential order. **DO NOT start Station N+1 until Station N is completely resolved and the code has been fixed by the Builder.**
 
 **Start Loop {Loop} (starting at Loop=1):**
@@ -58,3 +60,6 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
        - **STOP** and output: *"Code review is complete with zero flaws. To prevent context bloat, please start a new chat session and prompt me with: 'Resume workflow from docs/temp/session_handoff.md to start finalization'."*
 
 **Builder Pushback:** At any point, if `custom_build` reports that a flaw is impossible to implement, call `architect` to update the plan and reject the flaw with a technical justification (e.g., `implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the current Station.
+
+## When to use me
+Use this when you have finished implementing a feature or fix and need to ensure it meets the project's scientific, robustness, and style standards. This skill manages the multi-station review process.

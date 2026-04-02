@@ -1,8 +1,10 @@
 ---
+name: plan-complex-architecture
 description: Standard scatter-gather planning workflow for complex changes, ML logic, or significant refactoring.
 ---
 # Standard Complex Workflow
 
+## What I do
 1. **Planning Phase (Concurrent Scatter-Gather):**
    - **Step 0 (Draft):** Call the `architect` subagent to draft `docs/temp/implementation_plan_v0_draft.md`. Wait for completion.
    - **Step 1 (Concurrent Review):** Call the `scientist`, `tester`, and `review` subagents **concurrently** (in parallel) to review `v0_draft.md`. 
@@ -20,3 +22,6 @@ description: Standard scatter-gather planning workflow for complex changes, ML l
 2. **Handoff Phase:**
    - YOU (the Conductor) must write a comprehensive summary of the current state, the finalized merged plan, and the next steps to `docs/temp/session_handoff.md`. **Do NOT delegate this to the Architect or any other agent; you must write it yourself to capture your current context.**
    - **STOP** and output the following message to the user: *"I have completed the planning and initial implementation phase. To prevent context bloat, please start a new chat session and prompt me with: 'Resume workflow from docs/temp/session_handoff.md to start the code review loop'."*
+
+## When to use me
+Use this for complex tasks that require careful planning and multi-disciplinary review (e.g., new ML models, major refactors, or architectural shifts). This skill manages the concurrent review and merging of plans.

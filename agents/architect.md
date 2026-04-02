@@ -42,7 +42,7 @@ Your implementation plans in `docs/temp/implementation_plan_v*.md` must include 
 status: "draft" # transitions to "reviewed", then "approved"
 version: "v1.1"
 after_reviewer: "scientist"
-task_type: "standard" # or "data_ingestion"
+task_type: "standard" # or "data-ingestion"
 requires_ml_review: true
 requires_data_engineer: false
 target_modules: ["src/forecasting", "tests"]

@@ -33,9 +33,9 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 1. **Triage:** Analyze the user's prompt.
    - If it is trivial (e.g., renaming a variable, fixing a typo), use the `Task` tool to pass it directly to the `custom_build` agent, wait for completion, use the `bash` tool to commit to git with a verbose and formatted message, then finish.
    - If the task is to fix a failing test then ask the `architect` agent to create an implementation plan, that you pass to the `custom_build` agent, which keeps going until the test passes. Once it passes, you use the `bash` tool to commit to git with a verbose and formatted message.
-   - If it involves adding a new dataset, use the `skill` tool to load the `data_ingestion` skill and follow its instructions.
-   - If it involves changing ML logic, pipelines, or significant refactoring, use the `skill` tool to load the `plan_complex_architecture` skill and follow its instructions.
-   - If it involves **reviewing** code, use the `skill` tool to load the `code_review_loop` skill and follow its instructions.
+   - If it involves adding a new dataset, use the `skill` tool to load the `data-ingestion` skill and follow its instructions.
+   - If it involves changing ML logic, pipelines, or significant refactoring, use the `skill` tool to load the `plan-complex-architecture` skill and follow its instructions.
+   - If it involves **reviewing** code, use the `skill` tool to load the `code-review-loop` skill and follow its instructions.
    - If it involves finalization (updating docs, ADRs), use the `skill` tool to load the `finalization` skill.
 
 ## Rules
