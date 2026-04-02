@@ -43,12 +43,26 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
    - **Phase 2 (Fresh Audit):**
      - Call `review` to perform a completely fresh, independent audit. **DO NOT provide previous review files.**
      - Reviewer outputs `reviewer_code_review_{Loop}.md`.
-     - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
+     - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 4.
      - If `total_flaws > 0`:
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_reviewer.md`.
        - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `git-commit` skill and follow its instructions to commit to git with a verbose and formatted message.
-4. **Loop Check & Human Veto:** 
-   - Summarize all changes made during this loop (Stations 1, 2, and 3).
+       - *Do not proceed to Station 4 until the Builder is finished.*
+4. **Station 4 (Simplicity & Elegance):**
+   - **Phase 1 (Verification - Only if Loop > 1):**
+     - Call `review` and provide `simplicity_review_{Loop-1}.md`.
+     - Ask: "Verification Mode: Did the Builder successfully simplify the code as requested in Loop {Loop-1}? Check the `## Review Responses & Rejections` section of the latest plan to see if the Architect formally rejected any of them. If any complexity remains unfixed and unrejected, output a new review re-raising it. If all are resolved, output `total_flaws: 0`."
+     - If `total_flaws > 0`: Call `architect` to update the plan, then `custom_build` to fix. Wait for completion, then use the `skill` tool to load the `git-commit` skill and follow its instructions to commit to git with a verbose and formatted message. Repeat Phase 1 until resolved.
+   - **Phase 2 (Fresh Audit):**
+     - Call `review` to perform a ruthless simplicity audit. **DO NOT provide previous review files.**
+     - Ask: "Ruthlessly check for simplicity. Is this the simplest approach? Can we remove any steps? Can we make the code more elegant? Can we reduce the number of lines of code (without making the code unreadable)?"
+     - Reviewer outputs `simplicity_review_{Loop}.md`.
+     - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
+     - If `total_flaws > 0`:
+       - Call `architect` to update the plan to `implementation_plan_v{Loop}.4_after_simplicity.md`.
+       - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `git-commit` skill and follow its instructions to commit to git with a verbose and formatted message.
+5. **Loop Check & Human Veto:** 
+   - Summarize all changes made during this loop (Stations 1, 2, 3, and 4).
    - **STOP** and ask the user: "Here are the changes made in Loop {Loop}. Would you like to revert or modify any of these decisions before we proceed?"
    - If the user says "Yes": Pass the user's feedback to the `architect` to update the implementation plan, then call `custom_build` to implement the human's corrections. Wait for completion, then use the `skill` tool to load the `git-commit` skill and follow its instructions to commit to git with a verbose and formatted message.
    - If the user says "No" (or after human corrections are built):
