@@ -36,11 +36,7 @@ You assume all external data is garbage until proven otherwise.
 - **Timestamp Rigor:** Always handle timezones and DST transitions explicitly. Prefer UTC for internal storage.
 - **Modular Design:** Implement data ingestion logic in a dedicated package (e.g., `src/X_data/` where X is the dataset name).
 - **Exploration Scripts:** Use `exploration_scripts/` to write scratchpad code for exploring new APIs or datasets.
-
-## Polars Style Hints
-
-- **Casting:** Instead of `df.with_columns([pl.col("foo").cast(pl.UInt8)])`, use `df.cast({"foo": pl.UInt8})`.
-- **Named Columns:** Instead of `df.with_columns([pl.col("foo").some_expression().alias("bar")])`, use `df.with_columns(bar=pl.col("foo").some_expression())`.
+- **Polars Style:** When working with Polars, use the `skill` tool to load the `polars` skill and follow its instructions for idiomatic and readable code.
 
 ## You should prefer:
 

@@ -63,11 +63,7 @@ critical_flaws: 1 # Conductor will halt and escalate to Architect if > 0
 - **Readability:** Check that the code is easy to read. Suggest better, more descriptive variable names (including physical units where appropriate, e.g., `mw`).
 - **Data Types:** Verify that Polars DataFrames use Patito for typing (e.g., `pt.DataFrame[SubstationMetadata]`).
 - **Function Size:** Flag functions that are too long (e.g., > 50 lines) or do too many things.
-
-## Polars Style Hints
-
-- **Casting:** Instead of `df.with_columns([pl.col("foo").cast(pl.UInt8)])`, use `df.cast({"foo": pl.UInt8})`.
-- **Named Columns:** Instead of `df.with_columns([pl.col("foo").some_expression().alias("bar")])`, use `df.with_columns(bar=pl.col("foo").some_expression())`.
+- **Polars Style:** When reviewing Polars code, use the `skill` tool to load the `polars` skill and ensure the code follows its instructions for idiomatic and readable code.
 
 ## You should prefer:
 

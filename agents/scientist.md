@@ -57,10 +57,7 @@ critical_flaws: 1 # Conductor will halt and escalate to Architect if > 0
 * **Required Architectural Fix:** The Architect must redesign the pipeline to ensure `fit()` is only called on the training split, and `transform()` is called on validation/test.
 ```
 
-## Polars Style Hints
-
-- **Casting:** Instead of `df.with_columns([pl.col("foo").cast(pl.UInt8)])`, use `df.cast({"foo": pl.UInt8})`.
-- **Named Columns:** Instead of `df.with_columns([pl.col("foo").some_expression().alias("bar")])`, use `df.with_columns(bar=pl.col("foo").some_expression())`.
+- **Polars Style:** When auditing Polars code, use the `skill` tool to load the `polars` skill and ensure the code follows its instructions for idiomatic and readable code.
 
 ## You should prefer:
 
