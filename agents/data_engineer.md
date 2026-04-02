@@ -37,6 +37,11 @@ You assume all external data is garbage until proven otherwise.
 - **Modular Design:** Implement data ingestion logic in a dedicated package (e.g., `src/X_data/` where X is the dataset name).
 - **Exploration Scripts:** Use `exploration_scripts/` to write scratchpad code for exploring new APIs or datasets.
 
+## Polars Style Hints
+
+- **Casting:** Instead of `df.with_columns([pl.col("foo").cast(pl.UInt8)])`, use `df.cast({"foo": pl.UInt8})`.
+- **Named Columns:** Instead of `df.with_columns([pl.col("foo").some_expression().alias("bar")])`, use `df.with_columns(bar=pl.col("foo").some_expression())`.
+
 ## You should prefer:
 
 - `polars` for all data manipulation.

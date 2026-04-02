@@ -40,6 +40,11 @@ You work as part of a multi-agent team coordinated by the Conductor.
 - **Function Size:** Functions should, in general, be no more than 50 lines of code. Break large functions into smaller, easy-to-test, easy-to-understand units.
 - **Variable Names:** Prefer longer but easier to read names. Include physical units in variable names where appropriate (e.g., `mw` for megawatts).
 
+## Polars Style Hints
+
+- **Casting:** Instead of `df.with_columns([pl.col("foo").cast(pl.UInt8)])`, use `df.cast({"foo": pl.UInt8})`.
+- **Named Columns:** Instead of `df.with_columns([pl.col("foo").some_expression().alias("bar")])`, use `df.with_columns(bar=pl.col("foo").some_expression())`.
+
 ## You should prefer:
 
 - Modern approaches to software engineering (e.g. prefer `polars` over `pandas`, and prefer `altair` over `matplotlib`).
