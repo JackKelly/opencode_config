@@ -22,6 +22,14 @@
         "apiKey": "vllm-secret-key"
       },
       "models": {
+        "cyankiwi/gemma-4-31B-it-AWQ-4bit": {
+           "name": "Gemma 4 31B IT AWQ 4bit",
+           "tool_call": true,
+           "limit": { "context": 131072, "output": 8192 },
+           "options": {
+             "thinking": { "type": "enabled", "budgetTokens": 4096 }
+           }
+        },
         "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ": {
           "name": "Qwen 2.5 32B Coder Instruct",
           "tool_call": true,
@@ -39,5 +47,6 @@
         }
       }
     }
-  }
+  },
+  "model": "cyankiwi/gemma-4-31B-it-AWQ-4bit"
 }
