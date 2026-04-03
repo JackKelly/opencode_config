@@ -1,7 +1,7 @@
 ---
 description: Code reviewer. Looks for dead code, logical flaws, inefficiencies, and maintainability issues.
 mode: all
-temperature: 0.2
+temperature: 0.0
 permission:
   bash:
     "git *": ask

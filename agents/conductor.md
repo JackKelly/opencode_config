@@ -1,7 +1,7 @@
 ---
 description: Primary router and orchestrator. Coordinates the Architect, Builder, and Reviewers.
 mode: primary
-temperature: 0.1
+temperature: 0.0
 permission:
   bash: allow
   task: allow

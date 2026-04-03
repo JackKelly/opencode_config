@@ -2,7 +2,7 @@
 description: Architectural planner. Explores code and runs read-only tests, but makes no changes.
 mode: all
 model: google/gemini-3.1-pro-preview
-temperature: 0.3
+temperature: 0.0
 permission:
   bash:
     "git *": ask

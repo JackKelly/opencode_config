@@ -1,7 +1,7 @@
 ---
 description: Writes and tests computer code.
 mode: all
-temperature: 0.1
+temperature: 0.0
 permission:
   bash:
     "git *": ask
