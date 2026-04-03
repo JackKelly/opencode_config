@@ -1,7 +1,6 @@
 ---
 description: Data Engineer. Specializes in defensive data ingestion, Patito schemas, Dagster assets, and API integrations.
 mode: all
-model: google/gemini-3.1-pro-preview
 temperature: 0.0
 permission:
   bash:
