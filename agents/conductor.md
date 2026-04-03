@@ -46,3 +46,6 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 - **Exploration Scripts:** Encourage agents to use `exploration_scripts/` for any scratchpad work.
 - **Fail Loudly:** Ensure all agents follow the "fail loudly" principle.
 
+
+## Tool Calling Rules
+CRITICAL: When outputting JSON for tool calls, you must output strictly valid JSON. Do not use special characters, symbols like ◁, or backslashes to escape normal alphabetical letters. Only escape valid JSON characters.
