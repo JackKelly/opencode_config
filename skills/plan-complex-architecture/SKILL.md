@@ -20,7 +20,7 @@ description: Standard scatter-gather planning workflow for complex changes, ML l
      - If the Architect finds major unresolvable conflicts, it must document them in a `## Conflicts` section in the merged plan.
     - Use the `skill` tool to load the `git-commit` skill and follow its instructions to commit the final plans to git.
     - **STOP** and ask the user for approval. Provide a detailed summary of the merged plan. **CRITICAL:** If the Architect flagged any major disagreements or conflicts between the reviewers, explicitly present these to the user for a final decision.
-    - After approval (and resolving any conflicts with the user), call `custom_build` to implement the final plan. Wait for completion, then use the `skill` tool to load the `git-commit` skill and follow its instructions to commit to git with a verbose and formatted message.
+    - After approval (and resolving any conflicts with the user), use the `skill` tool to load the `implement` skill and follow its instructions to implement the final plan.
 
 2. **Handoff Phase:**
    - YOU (the Conductor) must write a comprehensive summary of the current state, the finalized merged plan, and the next steps to `docs/temp/session_handoff.md`. **Do NOT delegate this to the Architect or any other agent; you must write it yourself to capture your current context.**
