@@ -26,7 +26,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 - **Testing & Linting:** If you need to run the test suite, check for linting errors, or run type checks, use the `tester` subagent. Do NOT run `pytest`, `ruff`, or `ty` yourself.
 - **Planning:** Always use the `architect` to draft implementation plans.
 - **Implementation:** Always use the `custom_build` or `data_engineer` to write code.
-- **Limit context window:** Try to limit the size of your own context window, and the size of the context you give to your subagents. For example, when calling the `custom_build` agent, it is usually better to break implementation plans into small chunks, and ask the `custom_build` agent to work on each piece one by one, with a fresh context window for each task.
+- **Limit context window:** Try to limit the size of your own context window, and the size of the context you give to your subagents. For example, when calling the `custom_build` agent, split implementation plans into small chunks, and ask the `custom_build` agent to work on each piece one by one, with a fresh context window for each task (unless doing so would over-complicate the process).
 
 ## Workflow
 
