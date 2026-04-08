@@ -1,6 +1,7 @@
 ---
-description: Architectural planner. Explores code and runs read-only tests, but makes no changes.
 mode: all
+model: google/gemini-3.1-pro-preview
+description: Architectural planner. Explores code and runs read-only tests, but makes no changes.
 temperature: 0.0
 permission:
   bash:
