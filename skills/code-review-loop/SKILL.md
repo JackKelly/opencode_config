@@ -7,6 +7,11 @@ description: Strict sequential code review and iteration loop involving Scientis
 ## What I do
 You must execute these stations in strict sequential order. **DO NOT start Station N+1 until Station N is completely resolved and the code has been fixed by the Builder.**
 
+You operate in one of two modes (controlled by the user):
+- Mode 1 (default): During the "fresh audit" phase, if a reviewer reports any flaws, then pause after the review to get the user's approval. Do NOT pass the review to the architect until the user has approved the review.
+- Mode 2: During the "fresh audit" phase, don't wait for the user's review. Move directly onto
+  implementation.
+
 **Start Loop {Loop} (starting at Loop=1):**
 
 1. **Station 1 (Math & ML Rigor):** 
@@ -19,6 +24,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - Scientist outputs `scientist_code_review_{Loop}.md`.
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 2.
      - If `total_flaws > 0`: 
+       - If in "Mode 1" then pause to get the user's approval of the review.
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.1_after_scientist.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 2 until the Builder is finished.*
@@ -33,6 +39,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - Reviewer outputs `simplicity_review_{Loop}.md`.
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 3.
      - If `total_flaws > 0`:
+       - If in "Mode 1" then pause to get the user's approval of the review.
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.2_after_simplicity.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 3 until the Builder is finished.*
@@ -46,6 +53,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - Tester outputs `tester_code_review_{Loop}.md`.
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 4.
      - If `total_flaws > 0`:
+       - If in "Mode 1" then pause to get the user's approval of the review.
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.3_after_tester.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 4 until the Builder is finished.*
@@ -59,6 +67,7 @@ You must execute these stations in strict sequential order. **DO NOT start Stati
      - Reviewer outputs `reviewer_code_review_{Loop}.md`.
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
      - If `total_flaws > 0`:
+       - If in "Mode 1" then pause to get the user's approval of the review.
        - Call `architect` to update the plan to `implementation_plan_v{Loop}.4_after_reviewer.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Loop Check until the Builder is finished.*
