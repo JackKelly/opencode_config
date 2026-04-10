@@ -1,6 +1,7 @@
 ---
 description: Code reviewer. Looks for dead code, logical flaws, inefficiencies, and maintainability issues.
 mode: all
+steps: 50
 temperature: 0.0
 permission:
   bash:

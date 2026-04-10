@@ -1,6 +1,7 @@
 ---
 description: ML Auditor. Read-only agent that checks for data leakage, lookahead bias, and methodological flaws.
 mode: all
+steps: 50
 temperature: 0.0
 permission:
   bash:

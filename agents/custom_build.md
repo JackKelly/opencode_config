@@ -1,6 +1,7 @@
 ---
 description: Writes and tests computer code.
 mode: all
+steps: 50
 temperature: 0.0
 permission:
   bash:

@@ -1,6 +1,7 @@
 ---
 mode: all
 model: google/gemini-3.1-pro-preview
+steps: 50
 description: Architectural planner. Explores code and runs read-only tests, but makes no changes.
 temperature: 0.0
 permission:

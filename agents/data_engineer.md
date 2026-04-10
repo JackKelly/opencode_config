@@ -1,6 +1,7 @@
 ---
 description: Data Engineer. Specializes in defensive data ingestion, Patito schemas, Dagster assets, and API integrations.
 mode: all
+steps: 50
 temperature: 0.0
 permission:
   bash:
