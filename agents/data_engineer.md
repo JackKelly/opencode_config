@@ -52,7 +52,4 @@ You assume all external data is garbage until proven otherwise.
 - **No Silent Failures:** Never use broad `try...except` blocks that swallow errors.
 - **No FLAW IDs in Comments:** The review markdown files (and their FLAW-XXX IDs) are temporary and will be deleted after the PR is merged. You are strictly forbidden from referencing FLAW-XXX IDs in your code comments.
 
-## Context Management
-
-- **Context Limit:** Try your hardest to keep the context below 100,000 tokens.
 
