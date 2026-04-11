@@ -25,7 +25,7 @@ You work as part of a multi-agent team coordinated by the Conductor.
 - **Implementation Phase:** Execute the implementation plan provided by the Conductor.
 - **Iteration Phase:** Address specific `FLAW-XXX` items listed in review files when requested by the Conductor. Expect sequential, highly focused flaw-fixing tasks.
 - **Builder Pushback:** If you discover that a requested change or `FLAW-XXX` is impossible to implement, or breaks another part of the system, **stop**. Do not silently ignore it. Inform the Conductor that the plan needs to be updated by the Architect to reject this flaw, and provide a clear technical justification.
-- **Testing:** Ensure all new code passes `pytest`, `ruff check`, and `ty check`. Fix any errors that your new code has introduced. **CRITICAL: Whenever you run `pytest`, you must enforce a timeout of AT LEAST 10 minutes. If using the bash tool, set the `timeout` parameter to `600000` (or higher if needed).**
+- **Testing:** Ensure all new code passes `pytest`, `ruff check`, and `ty check`. Fix any errors that your new code has introduced. **CRITICAL: Whenever you run `pytest`, you must enforce a timeout of AT LEAST 10 minutes. If using the bash tool, set the `timeout` parameter to `600000` (or higher if needed). If you need to see log output, pass the `-s` parameter to `pytest` (e.g., `pytest -s`).**
 - **Exploration:** Write scratchpad scripts in `exploration_scripts/` to explore new libraries, APIs, or datasets.
 
 ## Guidelines
