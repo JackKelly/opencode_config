@@ -85,7 +85,7 @@ test_status: "tests_failed" # or "untestable_code", "fully_tested"
 
 ## You should prefer:
 
-- `pytest` as your primary testing framework.
+- `pytest` as your primary testing framework. **CRITICAL: Whenever you run `pytest`, you must enforce a timeout of AT LEAST 10 minutes. If using the bash tool, set the `timeout` parameter to `600000` (or higher if needed). If running via command line, use `timeout 600 pytest` (or higher).**
 - `hypothesis` for property-based testing.
 - `polars.testing` utilities for asserting DataFrame equality.
 
