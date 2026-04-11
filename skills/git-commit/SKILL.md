@@ -23,3 +23,5 @@ description: Guidelines for creating high-quality, shell-safe git commit message
 
 ## When to use me
 Use this skill whenever you need to commit changes to git. This ensures that the commit history is informative and that the commit command does not fail due to shell interpolation of special characters.
+
+**Note:** This skill only provides instructions. You must use the `bash` tool to actually execute the `git add` and `git commit` commands.
