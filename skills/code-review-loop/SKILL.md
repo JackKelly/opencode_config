@@ -23,7 +23,7 @@ You operate in one of two modes (controlled by the user):
      - Ask: "Perform a fresh audit. Output your review to `docs/temp/scientist_code_review_{Loop}.md`."
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 2.
      - If `total_flaws > 0`: 
-       - If in "Mode 1" then pause to get the user's approval of the review.
+       - If in "Mode 1", pause to get the user's approval of the review.
        - Call `architect` using the `task` tool to update the plan to `docs/temp/implementation_plan_v{Loop}.1_after_scientist.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 2 until the Builder is finished.*
@@ -37,7 +37,7 @@ You operate in one of two modes (controlled by the user):
      - Ask: "Ruthlessly check for simplicity. Is this the simplest approach? Can we remove any steps? Can we make the code more elegant? Can we reduce the number of lines of code (without making the code unreadable)? Output your review to `docs/temp/simplicity_review_{Loop}.md`."
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 3.
      - If `total_flaws > 0`:
-       - If in "Mode 1" then pause to get the user's approval of the review.
+       - If in "Mode 1", pause to get the user's approval of the review.
        - Call `architect` using the `task` tool to update the plan to `docs/temp/implementation_plan_v{Loop}.2_after_simplicity.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 3 until the Builder is finished.*
@@ -51,7 +51,7 @@ You operate in one of two modes (controlled by the user):
      - Ask: "Perform a fresh audit. Output your review to `docs/temp/tester_code_review_{Loop}.md`."
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed immediately to Station 4.
      - If `total_flaws > 0`:
-       - If in "Mode 1" then pause to get the user's approval of the review.
+       - If in "Mode 1", pause to get the user's approval of the review.
        - Call `architect` using the `task` tool to update the plan to `docs/temp/implementation_plan_v{Loop}.3_after_tester.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Station 4 until the Builder is finished.*
@@ -65,7 +65,7 @@ You operate in one of two modes (controlled by the user):
      - Ask: "Perform a fresh audit. Output your review to `docs/temp/reviewer_code_review_{Loop}.md`."
      - Read the YAML frontmatter. If `total_flaws == 0`, proceed to Loop Check.
      - If `total_flaws > 0`:
-       - If in "Mode 1" then pause to get the user's approval of the review.
+       - If in "Mode 1", pause to get the user's approval of the review.
        - Call `architect` using the `task` tool to update the plan to `docs/temp/implementation_plan_v{Loop}.4_after_reviewer.md`.
         - Call `custom_build` to fix the code. Wait for completion, then use the `skill` tool to load the `implement` skill and follow its instructions to commit to git with a verbose and formatted message.
        - *Do not proceed to Loop Check until the Builder is finished.*
