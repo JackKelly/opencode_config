@@ -23,8 +23,8 @@ description: Standard scatter-gather planning workflow for complex changes, ML l
     - After approval (and resolving any conflicts with the user), use the `skill` tool to load the `implement` skill and follow its instructions to implement the final plan.
 
 2. **Handoff Phase:**
-   - YOU (the Conductor) must write a comprehensive summary of the current state, the finalized merged plan, and the next steps to `docs/temp/session_handoff.md`. **Do NOT delegate this to the Architect or any other agent; you must write it yourself to capture your current context.**
-   - **STOP** and output the following message to the user: *"I have completed the planning and initial implementation phase. To prevent context bloat, please start a new chat session and prompt me with: 'Resume workflow from docs/temp/session_handoff.md to start the code review loop'."*
+   - Use the `skill` tool to load the `session-handoff` skill.
+   - Follow its instructions to create `docs/temp/session_handoff.md` and instruct the user to start a new chat session to begin the code review loop.
 
 ## When to use me
 Use this for complex tasks that require careful planning and multi-disciplinary review (e.g., new ML models, major refactors, or architectural shifts). This skill manages the concurrent review and merging of plans.

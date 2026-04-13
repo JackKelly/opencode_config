@@ -75,11 +75,9 @@ You operate in one of two modes (controlled by the user):
     - If the user says "Yes": Pass the user's feedback to the `architect` using the `task` tool to update the implementation plan, then use the `skill` tool to load the `implement` skill and follow its instructions to implement the human's corrections.
    - If the user says "No" (or after human corrections are built):
      - If *any* station found flaws in this loop, increment the `{Loop}` counter.
-       - **Handoff Phase:** Before starting the next loop, YOU (the Conductor) must write a comprehensive summary of the current state, the flaws found, and the next steps to `docs/temp/session_handoff_after_loop_{loop-1}.md`. **Do NOT delegate this to another agent; you must write it yourself to capture your current context.**
-       - **STOP** and output: *"Loop {Loop-1} is complete, but flaws remain. To prevent context bloat, please start a new chat session and prompt me with: 'Resume workflow from docs/temp/session_handoff_after_loop_{loop-1}.md to start Loop {Loop}'."*
+       - **Handoff Phase:** Use the `skill` tool to load the `session-handoff` skill. Follow its instructions to create `docs/temp/session_handoff_after_loop_{loop-1}.md` and instruct the user to start a new chat session to begin Loop {Loop}.
      - If `total_flaws == 0` across ALL four stations in this loop, break the loop.
-       - **Handoff Phase:** YOU (the Conductor) must write a summary of the completed review to `docs/temp/session_handoff.md`. **Do NOT delegate this to another agent.**
-       - **STOP** and output: *"Code review is complete with zero flaws. To prevent context bloat, please start a new chat session and prompt me with: 'Resume workflow from docs/temp/session_handoff.md to start finalization'."*
+       - **Handoff Phase:** Use the `skill` tool to load the `session-handoff` skill. Follow its instructions to create `docs/temp/session_handoff.md` and instruct the user to start a new chat session to begin finalization.
 
 **Builder Pushback:** At any point, if `custom_build` reports that a flaw is impossible to implement, call `architect` using the `task` tool to update the plan and reject the flaw with a technical justification (e.g., `docs/temp/implementation_plan_v{Loop}.X_after_builder_pushback.md`), then resume the current Station.
 
