@@ -5,6 +5,8 @@ description: Guidelines for creating high-quality, shell-safe git commit message
 # Git Commit Workflow
 
 ## What I do
+- Assume the user has already staged the files.
+- Use `git diff --staged` to analyze the changes for the commit message.
 - Provide instructions for creating a verbose, bulleted list of every single change made, explaining the *why* and the *how* for each, and connecting the dots across the codebase.
 - Ensure the commit message follows this format:
   1. A concise summary of the changes on the first line.
@@ -24,4 +26,4 @@ description: Guidelines for creating high-quality, shell-safe git commit message
 ## When to use me
 Use this skill whenever you need to commit changes to git. This ensures that the commit history is informative and that the commit command does not fail due to shell interpolation of special characters.
 
-**Note:** This skill only provides instructions. You must use the `bash` tool to actually execute the `git add` and `git commit` commands.
+**Note:** This skill only provides instructions. You must use the `bash` tool to actually execute the `git commit` command (do not use `git add`).
