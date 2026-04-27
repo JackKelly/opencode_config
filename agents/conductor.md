@@ -37,6 +37,7 @@ Your job is to route the user's prompt to the correct subagents and manage the s
 1. **Triage:** Analyze the user's prompt.
    - If it is trivial (e.g., renaming a variable, fixing a typo), use the `task` tool to pass it directly to the `custom_build` agent, wait for completion. Then notify the user, summarize the changes, and wait for the user to manually review and stage the changes.
    - If the task is to fix a failing test then ask the `architect` agent to create an implementation plan, that you pass to the `custom_build` agent, which keeps going until the test passes. Once it passes, notify the user, summarize the changes, and wait for the user to manually review and stage the changes.
+   - If it involves a small feature or discussing a new feature without complex review, use the `task` tool to call the `architect` agent to discuss and draft a plan. Once the user is happy with the plan, use the `skill` tool to load the `implement` skill directly, bypassing `plan-complex-architecture`.
    - If it involves adding a new dataset, use the `skill` tool to load the `data-ingestion` skill and follow its instructions.
    - If it involves changing ML logic, pipelines, or significant refactoring, use the `skill` tool to load the `plan-complex-architecture` skill and follow its instructions.
    - If it involves **reviewing** code, use the `skill` tool to load the `code-review-loop` skill and follow its instructions.
