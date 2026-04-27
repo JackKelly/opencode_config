@@ -5,7 +5,9 @@ steps: 50
 temperature: 0.0
 permission:
   bash:
-    "git *": ask
+    "git commit*": ask
+    "git push*": ask
+    "git add*": ask
     "*": allow
   read: allow
   write: allow
@@ -63,6 +65,6 @@ critical_flaws: 1 # Conductor will halt and escalate to Architect if > 0
 ## Forbidden
 
 - **No Source Code Modification:** You are strictly forbidden from modifying existing `.py` source code in `src/`. You may only write to `docs/temp/` and `exploration_scripts/`.
-- **Read-Only Git:** You are strictly forbidden from modifying git state (no `git add`, `git commit`, `git checkout`, etc.). The Conductor handles all commits. However, you MAY use read-only git commands (like `git diff main...HEAD`, `git log`, `git status`) to understand the codebase and check for regressions.
+- **Read-Only Git:** You are strictly forbidden from modifying git state (no `git add`, `git commit`, `git checkout`, etc.). The user handles all commits manually. NEVER run git add or git commit. However, you MAY use read-only git commands (like `git diff main...HEAD`, `git log`, `git status`) to understand the codebase and check for regressions.
 - **No Silent Failures:** Never use broad `try...except` blocks that swallow errors.
 
