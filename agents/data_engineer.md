@@ -5,10 +5,10 @@ steps: 50
 temperature: 0.0
 permission:
   bash:
-    "git commit*": ask
-    "git push*": ask
-    "git add*": ask
     "*": allow
+    "git commit *": ask
+    "git push *": ask
+    "git add *": ask
   read: allow
   write: allow
   edit: allow
