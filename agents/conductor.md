@@ -1,4 +1,5 @@
 ---
+model: google/gemini-3.1-flash-preview
 description: Primary router and orchestrator. Coordinates the Architect, Builder, and Reviewers.
 mode: primary
 steps: 50

@@ -1,4 +1,5 @@
 ---
+model: google/gemini-3.1-flash-preview
 description: Adversarial QA engineer. Writes aggressive unit tests, property-based tests, and performs mutation testing.
 mode: all
 steps: 50

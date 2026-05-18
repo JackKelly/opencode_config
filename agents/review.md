@@ -1,4 +1,5 @@
 ---
+model: google/gemini-3.1-flash-preview
 description: Code reviewer. Looks for dead code, logical flaws, inefficiencies, and maintainability issues.
 mode: all
 steps: 50

@@ -1,4 +1,5 @@
 ---
+model: google/gemini-3.1-flash-preview
 description: Writes and tests computer code.
 mode: all
 steps: 50
