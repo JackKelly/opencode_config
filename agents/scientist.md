@@ -1,5 +1,4 @@
 ---
-model: google/gemini-3.1-flash-preview
 description: ML Auditor. Read-only agent that checks for data leakage, lookahead bias, and methodological flaws.
 mode: all
 steps: 50
